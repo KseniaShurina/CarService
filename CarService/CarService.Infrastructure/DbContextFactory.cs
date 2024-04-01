@@ -14,6 +14,10 @@ namespace CarService.Infrastructure
             _dbContextFactoryDefault = dbContextFactoryDefault;
         }
 
+        /// <summary>
+        /// Creates a new DbContext
+        /// </summary>
+        /// <returns>IDefaultDbContext</returns>
         public IDefaultDbContext GetDefaultDbContext()
         {
             return _dbContextFactoryDefault.CreateDbContext();

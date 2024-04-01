@@ -1,13 +1,10 @@
 using CarService.Infrastructure.Abstractions;
-using CarService.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore.Annotations;
-using System.Collections.Generic;
-using System.Linq;
+
 using System.Threading.Tasks;
 
 namespace CarService.Controllers
@@ -25,11 +22,15 @@ namespace CarService.Controllers
             _dbContextFactory = dbContextFactory;
         }
 
+        /// <summary>
+        /// Gets cars
+        /// </summary>
+        /// <returns>Array of cars</returns>
         [HttpGet]
         [SwaggerResponse(StatusCodes.Status200OK)]
         public async Task<IActionResult> Get()
         {
-            using var context = _dbContextFactory.GetDefaultDbContext();
+            await using var context = _dbContextFactory.GetDefaultDbContext();
 
             var cars = await context.Cars.ToArrayAsync();
 
