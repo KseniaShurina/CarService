@@ -26,12 +26,21 @@ namespace CarService.Controllers
         [SwaggerResponse(StatusCodes.Status200OK)]
         public async Task<IActionResult> Get()
         {
-            //await using var context = _dbContextFactory.GetDefaultDbContext();
+            await using var context = _dbContextFactory.GetDefaultDbContext();
 
-            //var cars = await context.Cars.ToArrayAsync();
+            var cars = await context.Cars.ToArrayAsync();
 
-            //return Ok(cars);
-            return NoContent();
+            return Ok(cars);
+        }
+
+        /// <summary>
+        /// This method will be created new items
+        /// </summary>
+        /// <returns>Status code</returns>
+        [HttpPost]
+        public BadRequestResult Post()
+        {
+            return BadRequest();
         }
     }
 }
